@@ -6,9 +6,6 @@ const initState = {
 }
 
 const todoReducer = (state = initState, action) => {
-  console.log('================================================')
-  console.log('action', action)
-  console.log('================================================')
   switch (action.type) {
     case TodoTypes.ADD_NEW_TODO:
       return { ...state, currentTodo: [...state.currentTodo, action.payload.data] }

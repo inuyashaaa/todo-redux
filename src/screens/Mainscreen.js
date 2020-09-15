@@ -1,37 +1,75 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
-  View, Text, StyleSheet, TouchableOpacity,
+  View, Text, StyleSheet, TouchableOpacity, Dimensions, SafeAreaView,
 } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
+import { TabView, SceneMap } from 'react-native-tab-view'
 import { addNewTodo } from '../redux/action'
+
+const { width } = Dimensions.get('window')
+const initialLayout = { width }
+
+const DoneTodoScreen = () => {
+  return (
+    <View style={{ flex: 1, backgroundColor: 'pink' }}>
+      <Text>DoneTodoScreen</Text>
+    </View>
+  )
+}
+
+const ArchiveTodoScreen = () => {
+  return (
+    <View style={{ flex: 1, backgroundColor: 'gray' }}>
+      <Text>ArchiveTodoScreen</Text>
+    </View>
+  )
+}
 
 const Mainscreen = (props) => {
   const { navigation } = props
   const dispatch = useDispatch()
   const todos = useSelector((state) => state)
 
+  const [currentTabIndex, setCurrentTabIndex] = useState(0)
+
+  const AllTodoComponent = () => {
+    console.log('================================================')
+    console.log('todos', todos)
+    console.log('================================================')
+    return (
+      <View style={{ flex: 1, backgroundColor: 'blue' }}>
+        <Text>AllTodoComponent</Text>
+      </View>
+    )
+  }
+
+  const renderScene = SceneMap({
+    all: AllTodoComponent,
+    done: DoneTodoScreen,
+    archive: ArchiveTodoScreen,
+  })
+
   return (
     <View style={styles.container}>
-      <Text style={{ fontFamily: 'Montserrat-Bold' }}>Todo App</Text>
-      <Text style={{ fontFamily: 'Montserrat-Bold' }}>{JSON.stringify(todos)}</Text>
-
-      <TouchableOpacity onPress={() => navigation.navigate('DoneScreen')}>
-        <Text style={{ fontFamily: 'Montserrat-Bold' }}>Go done</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        dispatch(addNewTodo('New homework'))
-      }}
-      >
-        <Text style={{ fontFamily: 'Montserrat-Bold' }}>Add Todo</Text>
-      </TouchableOpacity>
+      <SafeAreaView />
+      <TabView
+        navigationState={{
+          index: currentTabIndex,
+          routes: [
+            { key: 'all', title: 'All' },
+            { key: 'done', title: 'Done' },
+            { key: 'archive', title: 'Archive' },
+          ],
+        }}
+        renderScene={renderScene}
+        onIndexChange={setCurrentTabIndex}
+        initialLayout={initialLayout}
+      />
     </View>)
 }
 const styles = StyleSheet.create({
-  container:
-  {
+  container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
 export default Mainscreen
