@@ -11,7 +11,7 @@ const initialLayout = { width }
 
 const DoneTodoScreen = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: 'pink' }}>
+    <View style={{ flex: 1 }}>
       <Text>DoneTodoScreen</Text>
     </View>
   )
@@ -19,7 +19,7 @@ const DoneTodoScreen = () => {
 
 const ArchiveTodoScreen = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: 'gray' }}>
+    <View style={{ flex: 1 }}>
       <Text>ArchiveTodoScreen</Text>
     </View>
   )
@@ -37,7 +37,7 @@ const Mainscreen = (props) => {
     console.log('todos', todos)
     console.log('================================================')
     return (
-      <View style={{ flex: 1, backgroundColor: 'blue' }}>
+      <View style={{ flex: 1 }}>
         <Text>AllTodoComponent</Text>
       </View>
     )
