@@ -6,3 +6,10 @@ export const addNewTodo = (data) => {
     payload: { data },
   }
 }
+
+export const deleteTodo = (data) => {
+  return {
+    type: TodoTypes.DELETE_TODO,
+    payload: { data },
+  }
+}
