@@ -128,6 +128,8 @@ const Mainscreen = (props) => {
               style={{
                 ...Fonts.semiBold, fontSize: 14, color: Colors.white, marginHorizontal: 24,
               }}
+              returnKeyType="google"
+              keyboardType="phone-pad"
             />
           </Animated.View>
 
